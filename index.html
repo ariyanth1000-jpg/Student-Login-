@@ -4,10 +4,16 @@
 <title>Trending Academy LTD</title>
 
 <style>
-/* ====== BASE ====== */
-body{
+/* ====== UNIVERSAL ====== */
+*{
+  box-sizing: border-box; /* সব input, button একই মাপের হবে */
   margin:0;
+  padding:0;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* ====== BODY ====== */
+body{
   background: linear-gradient(135deg, #FBCFE8, #e0f2fe, #4ADE80);
   color: #0f172a;
   min-height: 100vh;
@@ -196,7 +202,7 @@ button:hover{
   cursor:pointer;
   font-size:22px;
   color:white;
-  display:none; /* প্রথমে লুকানো থাকবে */
+  display:none; 
 }
 
 .sideMenu{
@@ -304,7 +310,6 @@ function login(){
     document.getElementById("loginBox").style.display="none";
     document.getElementById("profile").style.display="block";
 
-// লগইন সাকসেস হলে মেনু বাটন দেখাবে
     document.getElementById("menuBtn").style.display="block";
 
     let box=document.getElementById("profile");
@@ -344,33 +349,24 @@ function login(){
 }
 
 function toggleMenu(){
-
   const menu=document.getElementById("sideMenu");
-
   if(menu.style.left==="0px"){
     menu.style.left="-260px";
   }else{
     menu.style.left="0px";
   }
-
 }
 
 function openWebView(url){
-
   document.getElementById("webview").style.display="block";
   document.getElementById("webview").src=url;
-
   toggleMenu();
-
 }
 
 function closeWebView(){
-
   document.getElementById("webview").style.display="none";
   document.getElementById("webview").src="";
-
   toggleMenu();
-
 }
 </script>
 
