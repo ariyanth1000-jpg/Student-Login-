@@ -88,7 +88,7 @@ button:hover{
   display:none;
   max-width:900px;
   margin:30px auto;
-  background:#ffffff;
+  background:#B3E5FC;
   padding:25px;
   border-radius:20px;
   border:5px solid #cbd5e1;
@@ -182,99 +182,8 @@ button:hover{
   color:#475569;
   font-size:12px;
 }
-</style>
-</head>
 
-<body>
-
-<!-- LOGIN -->
-<div class="loginBox" id="loginBox">
-<h3 style="text-align:center; color:#2563eb;">Student Login Page</h3>
-<input id="phone" placeholder="✆ Whatsapp Number">
-<input id="password" placeholder="🔐 Password" type="text">
-<button onclick="login()">╰┈➤ LOGIN NOW</button>
-<div id="loading"></div>
-</div>
-
-<!-- PROFILE -->
-<div class="profile" id="profile">
-<div class="header">Trending Academy LTD</div>
-<div class="sub">🎓 Profile Information ꫂ❁</div>
-<div id="content"></div>
-<div class="footer">
-♛ CEO: Ananna Afrin Anu ❀ <br>
-👑 Owner: MD Tamim (×̷̷͜×̷) <br>
-📍 Office: Bhola, Barisal, Dhaka, Bangladesh 🇧🇩
-</div>
-</div>
-
-<script>
-const URL="https://script.google.com/macros/s/AKfycbwOiNS5ISa9IsVZp5VX01ij5uPVFVSDCY2VOn0apDUNeQasVJabT2VwD3J3kUR_JGE6wg/exec";
-
-function add(label,value){
-  return `<div class="row">
-    <div class="label">${label}</div>
-    <div class="value">${value}</div>
-  </div>`;
-}
-
-function login(){
-  document.getElementById("loading").innerText="Checking...";
-
-  fetch(URL,{
-    method:"POST",
-    body:new URLSearchParams({
-      phone:phone.value,
-      password:password.value
-    })
-  })
-  .then(r=>r.json())
-  .then(d=>{
-    document.getElementById("loading").innerText="";
-    if(d.status!=="VERIFIED"){
-      document.getElementById("loading").innerText="Login Failed ❌";
-      return;
-    }
-
-    document.getElementById("loginBox").style.display="none";
-    document.getElementById("profile").style.display="block";
-
-    let box=document.getElementById("profile");
-    if(d.M && d.M.trim()!==""){
-      box.classList.add("activeProfile");
-    }else{
-      box.classList.add("inactiveProfile");
-    }
-
-    let html="";
-    if(d.M && d.M.trim()!==""){
-      html += add("🪪 Student ID", d.A);
-      html += add("❦ Status", d.M);
-      html += add("🪼 Full Name", d.B);
-      html += add("友 Language", d.C);
-      html += add("🚻 Gender", d.D);
-      html += add("🌎 Country", d.E);
-      html += add("🎂 Date of Birth", d.F);
-      html += add("⏰ Age Now", d.AGE);
-      html += add("💸 Balance info", d.O);
-      html += add("✆ Phone No ", d.G);
-      html += add("📞 WhatsApp", d.H);
-      html += add("💌 Email ID", d.I);
-      html += add("🏷️ Invitation", d.K);
-      html += add("🗓️ Registration", d.L);
-      html += add("👨🏻‍🎓 Team Advisor", d.P);
-    }else{
-      html += add("🪪 Student ID", d.A);
-      html += add("👨🏻‍🎓Full Name", d.B);
-      html += add("✆ Whatsapp", d.H);
-      html += add("🏦 Balance", d.O + " (Pending)");
-      html += add("🔄 Status", "Inactive 🔴");
-    }
-    document.getElementById("content").innerHTML = html;
-  });
-}
-</script>
-<style>
+/* ====== FLOATING MENU ====== */
 .menuBtn{
   position:fixed;
   top:10px;
@@ -287,6 +196,7 @@ function login(){
   cursor:pointer;
   font-size:22px;
   color:white;
+  display:none; /* প্রথমে লুকানো থাকবে */
 }
 
 .sideMenu{
@@ -324,24 +234,115 @@ function login(){
   background:#fff;
 }
 </style>
+</head>
 
-<div class="menuBtn" onclick="toggleMenu()">☰</div>
+<body>
+
+<!-- LOGIN -->
+<div class="loginBox" id="loginBox">
+<h3 style="text-align:center; color:#2563eb;">Student Login Page</h3>
+<input id="phone" placeholder="✆ Whatsapp Number">
+<input id="password" placeholder="🔐 Password" type="text">
+<button onclick="login()">╰┈➤ LOGIN NOW</button>
+<div id="loading"></div>
+</div>
+
+<!-- PROFILE -->
+<div class="profile" id="profile">
+<div class="header">Trending Academy LTD</div>
+<div class="sub">🎓 Profile Information ꫂ❁</div>
+<div id="content"></div>
+<div class="footer">
+♛ CEO: Ananna Afrin Anu ❀ <br>
+👑 Owner: MD Tamim (×̷̷͜×̷) <br>
+📍 Office: Bhola, Barisal, Dhaka, Bangladesh 🇧🇩
+</div>
+</div>
+
+<!-- FLOATING MENU -->
+<div class="menuBtn" id="menuBtn" onclick="toggleMenu()">☰</div>
 
 <div class="sideMenu" id="sideMenu">
-
   <div class="menuItem" onclick="closeWebView()">👤 Profile Page 🪪</div>
-
   <div class="menuItem" onclick="openWebView('LINK')">🏦 Credits History 💲</div>
   <div class="menuItem" onclick="openWebView('LINK')"> ✄ Debits History ✂️</div>
   <div class="menuItem" onclick="openWebView('LINK')">📚 Classroom 🎒</div>
   <div class="menuItem" onclick="openWebView('LINK')">🏧 Withdraw Now 💸</div>
-  <div class="menuItem" onclick="openWebView('LINK')">➜]🚪 Log out 📡</div>
-
+  <div class="menuItem" onclick="openWebView('https://ariyanth1000-jpg.github.io/Student-Login-/')">➜]🚪 Log out 📡</div>
 </div>
 
 <iframe id="webview"></iframe>
 
 <script>
+const URL="https://script.google.com/macros/s/AKfycbwOiNS5ISa9IsVZp5VX01ij5uPVFVSDCY2VOn0apDUNeQasVJabT2VwD3J3kUR_JGE6wg/exec";
+
+function add(label,value){
+  return `<div class="row">
+    <div class="label">${label}</div>
+    <div class="value">${value}</div>
+  </div>`;
+}
+
+function login(){
+  document.getElementById("loading").innerText="Checking...";
+
+  fetch(URL,{
+    method:"POST",
+    body:new URLSearchParams({
+      phone:phone.value,
+      password:password.value
+    })
+  })
+  .then(r=>r.json())
+  .then(d=>{
+    document.getElementById("loading").innerText="";
+    if(d.status!=="VERIFIED"){
+      document.getElementById("loading").innerText="Login Failed ❌";
+      return;
+    }
+
+    document.getElementById("loginBox").style.display="none";
+    document.getElementById("profile").style.display="block";
+
+// লগইন সাকসেস হলে মেনু বাটন দেখাবে
+    document.getElementById("menuBtn").style.display="block";
+
+    let box=document.getElementById("profile");
+    if(d.M && d.M.trim()!==""){
+      box.classList.add("activeProfile");
+    }else{
+      box.classList.add("inactiveProfile");
+    }
+
+    let html="";
+    if(d.M && d.M.trim()!==""){
+      html += add("🪪 Student ID", d.A);
+      html += add("❦ Status", d.M);
+      html += add("🪼 Full Name", d.B);
+      html += add("友 Language", d.C);
+      html += add("🚻 Gender", d.D);
+      html += add("🌎 Country", d.E);
+      html += add("🎂 Date of Birth", d.F);
+      html += add("⏰ Age Now", d.AGE);
+      html += add("💸 Balance info", d.O);
+      html += add("✆ Phone No ", d.G);
+      html += add("📞 WhatsApp", d.H);
+      html += add("💌 Email ID", d.I);
+      html += add("🏷️ Invitation", d.K);
+      html += add("🗓️ Registration", d.L);
+      html += add("👨🏻‍🎓 Team Advisor", d.P);
+    }else{
+      html += add("🪪 Student ID", d.A);
+      html += add("👨🏻‍🎓Full Name", d.B);
+      html += add("✆ Whatsapp", d.H);
+      html += add("🏦 Balance", d.O + " (Pending)");
+      html += add("🔄 Status", "Inactive 🔴");
+    }
+
+    document.getElementById("content").innerHTML = html;
+  });
+}
+
 function toggleMenu(){
 
   const menu=document.getElementById("sideMenu");
@@ -372,5 +373,6 @@ function closeWebView(){
 
 }
 </script>
+
 </body>
 </html>
